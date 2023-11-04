@@ -1,0 +1,70 @@
+/* css 기본 세팅 */
+*{
+  box-sizing: border-box;
+  margin: 0px;
+}
+
+html, body{
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper{
+  width: 100%;
+  height: 100%;
+  /* background-color: aqua; */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.wrapper_header{
+  width: 100%;
+  height: 48px;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.contents_title{
+  display: flex;
+  flex-direction: row;
+  /* border: 1px solid red; */
+  align-items: center;
+}
+
+.title{
+  color: #55b2e4;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.subtitle{
+  font-size: 8px;
+  margin-left: 10px;
+  font-family: Sci Fied Bitmap;
+}
+
+.dividedLine{
+  width: 100%;
+  border-top: 1px solid gray;
+}
+
+.contents_body{
+  font-size: 11px;
+  color: gray;
+}
+.wrapper_body{
+  width: 100%;
+  height: 270px;
+  /* background-color: blue; */
+}
+
+.wrapper_body .contents_body{
+  margin-top: 14px;
+  background-color: #C4C4C4;
+  width: 100%;
+  height: 240px;
+}

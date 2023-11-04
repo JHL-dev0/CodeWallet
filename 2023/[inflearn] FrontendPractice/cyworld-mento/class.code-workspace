@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../class"
+		},
+		{
+			"path": "../cyworld"
+		},
+		{
+			"path": "."
+		}
+	],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "cyworld",
+    "liveServer.settings.port": 5501
+  }
+}

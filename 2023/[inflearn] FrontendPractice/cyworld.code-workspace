@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "cyworld"
+		},
+		{
+			"path": "cyworld-mento"
+		}
+	],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "cyworld",
+    "liveServer.settings.port": 5501
+  }
+}
