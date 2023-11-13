@@ -3,6 +3,7 @@
 <head>
     <title>Game</title>
     <link rel="stylesheet" href="styles/game.css">
+    <script src="./game.js"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -20,7 +21,7 @@
             <div class="game_subtitle">제시어 : <span id="word">코드캠프</span></div>
             <div class="word_text">
                 <input class="textbox" id="myword" placeholder="단어를 입력하시오">
-                <button class="search_button">입력</button>
+                <button class="search_button" onclick="startWord()">입력</button>
             </div>
             <div id="result" class="word_result">결과</div>
         </div>

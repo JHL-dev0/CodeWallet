@@ -98,25 +98,29 @@ html, body{
 }
 
 .game_lotto_number{
-    padding-top: 4px;
     width: 130px;
     height: 21px;
-    border: 1px solid #000;
+    border: 1px solid black;
     border-radius: 8px;
     background-color: #FFE400;
     color: #000;
-    text-align: center;
     font-family: Malgun Gothic;
     font-size: 10px;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 8px;
+    margin-top: 10px;
+    margin-bottom: 11px;
 }
 
 .game_lotto_button{
+    width: 62px;
+    height: 24px;
+    background-color: white;
     border-radius: 5px;
-    border: 1px solid #000;
-    background: #FFF;
+    border: 1px solid black;
     color: #020101;
     text-align: center;
     font-family: Malgun Gothic;
