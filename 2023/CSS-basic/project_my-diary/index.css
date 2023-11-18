@@ -1,0 +1,40 @@
+body{
+    background-color: gainsboro;
+}
+
+.container {
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 100px 200px;
+    padding: 20px;
+}
+
+.wrapper__head__title {
+    background-color: orange;
+    color: white;
+    text-align: center;
+}
+
+.wrapper__head__sub-title{
+    font-weight: bold;
+}
+
+.divideLine{
+    margin-top: 30px;
+    border-bottom: 2px dotted gray;
+}
+
+#point {
+    color: orange;
+    text-decoration: underline;
+}
+
+.wrapper__body {
+    border: 2px solid gray;
+    padding: 20px;
+}
+
+.content__title {
+    background-color: gainsboro;
+}

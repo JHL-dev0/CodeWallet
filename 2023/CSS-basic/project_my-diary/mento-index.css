@@ -1,0 +1,93 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: gainsboro;
+}
+
+.container {
+    background-color: #eeeeee;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+}
+
+.wrapper {
+    width: 620px;
+    padding: 40px 30px;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 10px;
+    
+}
+
+.wrapper__head {
+    /* background-color: red; */
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed gray;
+    padding: 5px;
+}
+
+.wrapper__head__title {
+    background-color: orange;
+    font-size: 32px;
+    color: white;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.wrapper__head__sub-title{
+    font-size: 18px;
+    padding: 10px 0px;
+}
+
+
+#point {
+    color: orange;
+    font-size: 22px;
+    text-decoration: underline;
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+}
+
+.wrapper__body {
+    border: 1px solid #dddddd;
+    padding: 20px 30px;
+}
+
+.diary__title {
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #f4f4f4;
+    margin-bottom: 20px;
+}
+
+.apple-tea {
+    font-weight: 600;
+    color: red;
+}
+
+.lemon-tea {
+    font-weight: 600;
+    color: orange;
+}
+
+.highlight {
+    font-size: 22px;
+    color: blue;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.diary-date {
+    color: #919191;
+    font-size: 14px;
+    text-align: right;
+}
