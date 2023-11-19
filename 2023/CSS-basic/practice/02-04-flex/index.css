@@ -7,6 +7,9 @@
     background: gray;
     padding: 10px;
     display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .flex-container div {
