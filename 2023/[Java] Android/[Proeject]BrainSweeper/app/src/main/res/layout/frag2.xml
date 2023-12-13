@@ -8,6 +8,13 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="2번 화면입니다."
-        android:textSize="40sp" />
+        android:gravity="center"
+        android:text="요소를 클릭하여 분류를 진행하세요"
+        android:textSize="20sp" />
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:choiceMode="singleChoice" />
 </LinearLayout>
