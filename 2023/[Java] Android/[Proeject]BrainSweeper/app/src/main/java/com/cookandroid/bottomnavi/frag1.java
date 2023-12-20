@@ -1,6 +1,5 @@
 package com.cookandroid.bottomnavi;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
 
@@ -27,7 +27,7 @@ public class frag1 extends Fragment {
     private EditText editText;
     private int selectedPosition = -1; // 선택된 항목의 위치를 저장하는 변수
     private FragmentAListener listener;
-
+    private SharedViewModel viewModel;
     public interface FragmentAListener {
         void onInputASent(CharSequence input);
         void onItemListUpdated(ArrayList<String> itemList);
@@ -62,6 +62,9 @@ public class frag1 extends Fragment {
                 selectedPosition = position; // 사용자가 선택한 항목의 위치 저장
             }
         });
+
+        // ViewModel 초기화
+        viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
