@@ -21,13 +21,16 @@ import java.util.ArrayList;
 
 public class frag1 extends Fragment {
     private View view;
-    private ArrayList<String> itemList;
-    private ArrayAdapter<String> adapter;
-    private ListView listView;
-    private EditText editText;
-    private int selectedPosition = -1; // 선택된 항목의 위치를 저장하는 변수
-    private FragmentAListener listener;
-    private SharedViewModel viewModel;
+    private ArrayList<String> itemList; // 리스트 아이템을 저장할 ArrayList
+    private ArrayAdapter<String> adapter; // ListView에 데이터를 제공할 ArrayAdapter
+    private ListView listView; // XML에서 정의된 ListView
+    private EditText editText; // 아이템 입력을 위한 EditText
+    private int selectedPosition = -1; // 선택된 아이템의 위치를 추적
+    private FragmentAListener listener; // 프래그먼트 간 통신을 위한 리스너 인터페이스
+    private SharedViewModel viewModel; // SharedViewModel 인스턴스
+
+
+    // FragmentAListener 인터페이스 정의
     public interface FragmentAListener {
         void onInputASent(CharSequence input);
         void onItemListUpdated(ArrayList<String> itemList);
@@ -38,6 +41,7 @@ public class frag1 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
+        // 프래그먼트 레이아웃 설정
         view = inflater.inflate(R.layout.frag1, container, false);
 
         // Initialize the ArrayList and ArrayAdapter
@@ -55,7 +59,7 @@ public class frag1 extends Fragment {
         ImageButton btnEdit = (ImageButton) view.findViewById(R.id.btnEdit);
         ImageButton btnDelete = (ImageButton) view.findViewById(R.id.btnDelete);
 
-
+        // ListView 아이템 선택 이벤트 리스너
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -63,66 +67,121 @@ public class frag1 extends Fragment {
             }
         });
 
-        // ViewModel 초기화
+        // SharedViewModel 초기화
         viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = editText.getText().toString();
-                if (!text.isEmpty()) {
-                    if (selectedPosition >= 0) {
-                        // 선택된 항목 수정
-                        itemList.set(selectedPosition, text);
-                        selectedPosition = -1; // 선택 초기화
-                    } else {
-                        // 새 항목 추가
-                        itemList.add(text);
-                    }
+        // ViewModel에서 데이터 가져오기 및 ListView에 출력
+        viewModel.getItemList().observe(getViewLifecycleOwner(), newItems -> {
+            itemList.clear();
+            itemList.addAll(newItems);
+            adapter.notifyDataSetChanged();
+        });
 
-                    // ListView 갱신
-                    CharSequence input = itemList.get(itemList.size() - 1);
-                    listener.onInputASent(input);
-
-                    adapter.notifyDataSetChanged();
-                    listView.clearChoices(); // ListView의 선택 상태 초기화
-                    editText.setText(""); // EditText 내용을 비웁니다.
-                    editText.requestFocus(); // EditText에 포커스를 유지합니다.
-
-
+        btnAdd.setOnClickListener(v -> {
+            String text = editText.getText().toString();
+            if (!text.isEmpty()) {
+                if (selectedPosition >= 0) {
+                    // 선택된 항목 수정
+                    viewModel.updateItem(selectedPosition, text);
+                    selectedPosition = -1; // 선택 초기화
                 } else {
-                    Toast.makeText(getActivity(), "텍스트를 입력해주세요!", Toast.LENGTH_SHORT).show();
+                    // 새 항목 추가
+                    viewModel.addItem(text);
                 }
+                editText.setText(""); // EditText 내용을 비웁니다.
+                editText.requestFocus(); // EditText에 포커스를 유지합니다.
+            } else {
+                Toast.makeText(getActivity(), "텍스트를 입력해주세요!", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+//        btnAdd.setOnClickListener(v -> {
+//            String text = editText.getText().toString();
+//            if (!text.isEmpty()) {
+//                viewModel.addItem(text);
+//                editText.setText(""); // EditText 내용을 비웁니다.
+//                editText.requestFocus(); // EditText에 포커스를 유지합니다.
+//            } else {
+//                Toast.makeText(getActivity(), "텍스트를 입력해주세요!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+
+//        btnAdd.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String text = editText.getText().toString();
+//                if (!text.isEmpty()) {
+//                    if (selectedPosition >= 0) {
+//                        // 선택된 항목 수정
+//                        itemList.set(selectedPosition, text);
+//                        selectedPosition = -1; // 선택 초기화
+//                    } else {
+//                        // 새 항목 추가
+//                        itemList.add(text);
+//                    }
+//
+//                    // ListView 갱신
+//                    CharSequence input = itemList.get(itemList.size() - 1);
+//                    listener.onInputASent(input);
+//
+//                    adapter.notifyDataSetChanged();
+//                    listView.clearChoices(); // ListView의 선택 상태 초기화
+//                    editText.setText(""); // EditText 내용을 비웁니다.
+//                    editText.requestFocus(); // EditText에 포커스를 유지합니다.
+//
+//
+//                } else {
+//                    Toast.makeText(getActivity(), "텍스트를 입력해주세요!", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+
+//        btnEdit.setOnClickListener(v -> {
+//            if (selectedPosition >= 0) {
+//                editText.setText(itemList.get(selectedPosition));
+//                Toast.makeText(getContext(), "수정버튼이 클릭되었습니다!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (selectedPosition >= 0) {
-//                    Toast.makeText(getContext(), "수정버튼이 클릭되었습니다!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "수정버튼이 클릭되었습니다!", Toast.LENGTH_SHORT).show();
                     editText.setText(itemList.get(selectedPosition));
                 }
             }
         });
 
-
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selectedPosition >= 0) {
-//                    Toast.makeText(getContext(), "삭제버튼이 클릭되었습니다!", Toast.LENGTH_SHORT).show();
-                    itemList.remove(selectedPosition);
-                    adapter.notifyDataSetChanged();
-                    selectedPosition = -1; // 선택 초기화
-                    listView.clearChoices(); // ListView의 선택 상태 초기화
-
-
-//
-                    editText.setText(""); // EditText 내용을 비웁니다.
-                }
+        btnDelete.setOnClickListener(v -> {
+            if (selectedPosition >= 0) {
+                viewModel.removeItem(selectedPosition);
             }
         });
+
+
+
+
+//        btnDelete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (selectedPosition >= 0) {
+////                    Toast.makeText(getContext(), "삭제버튼이 클릭되었습니다!", Toast.LENGTH_SHORT).show();
+//                    itemList.remove(selectedPosition);
+//                    adapter.notifyDataSetChanged();
+//                    selectedPosition = -1; // 선택 초기화
+//                    listView.clearChoices(); // ListView의 선택 상태 초기화
+//
+//
+////
+//                    editText.setText(""); // EditText 내용을 비웁니다.
+//                }
+//            }
+//        });
 
         return view;
     }
