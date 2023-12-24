@@ -14,9 +14,11 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="프로젝트" />
+            android:background="#FF5722"
+            android:text="바로할것" />
 
         <ListView
+            android:id="@+id/listViewForImmediateTasks"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
@@ -31,9 +33,11 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:background="#FFEB3B"
+            android:text="계획수립 필요" />
 
         <ListView
+            android:id="@+id/listViewForPlannedTasks"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />
